@@ -99,6 +99,13 @@ section.hero > button {
   text-transform: uppercase;
 }
 
+section.hero{
+  position:sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 3;
+}
+
 main article {
   padding: 48px 96px;
 }
@@ -125,31 +132,64 @@ footer {
   color: var(--off-white);
 }
 
-/* tooltip code below */
-
+.drop-cap{
+  float: left;
+  font-size: 3em;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  font-weight: bold;
+}
+/* Tooltip container */
 span.tooltip {
   color: var(--danger-color);
   position: relative;
   cursor: pointer;
 }
 
-/* underline span on hover/focus */
+/* Underline span on hover/focus */
 span.tooltip:hover,
 span.tooltip:focus {
   text-decoration: underline;
 }
-/* show tooltip on hover/focus */
+
+/* Show tooltip on hover/focus */
 span.tooltip:hover > span,
 span.tooltip:focus > span {
-  display: inline;
+  display: inline; /* Change to block for tooltip */
 }
 
-/* styling for tooltip bubble */
+/* Styling for tooltip bubble */
 span.tooltip span {
-  display: none;
+  display: none; /* Initially hidden */
+  position: absolute; /* Position it relative to the tooltip */
+  bottom: 100%; /* Position above the text */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust to center */
+  background-color: black; /* Background color */
+  color: white; /* Text color */
+  padding: 5px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  z-index: 1; /* Ensure it appears above other elements */
+  white-space: nowrap; /* Prevent line breaks */
+  opacity: 0; /* Start invisible */
+  transition: opacity 0.2s ease; /* Smooth transition */
 }
 
-/* styling for tooltip bubble arrow */
+/* Show tooltip when hovering or focusing */
+span.tooltip:hover > span,
+span.tooltip:focus > span {
+  display: block; /* Show as block */
+  opacity: 1; /* Make it visible */
+}
+
+/* Styling for tooltip bubble arrow */
 span.tooltip span::after {
   content: "";
+  position: absolute;
+  top: 100%; /* Position it below the tooltip bubble */
+  left: 50%; /* Center horizontally */
+  margin-left: -5px; /* Adjust left margin */
+  border-width: 5px; /* Size of the arrow */
+  border-style: solid;
+  border-color: black transparent transparent transparent; /* Arrow color */
 }
